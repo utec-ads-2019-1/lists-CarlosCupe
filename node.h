@@ -9,6 +9,7 @@ struct Node {
 
     void killSelf() {
         // TODO
+        
     }
 };
 
