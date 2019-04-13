@@ -11,30 +11,89 @@ class ForwardList : public List<T> {
 
         T front() {
             // TODO
+            return head->data;
         }
 
         T back() {
             // TODO
+            return tail->data;
         }
 
         void push_front(T value) {
             // TODO
+            Node<T> *temp = New Node<T>;
+            temp->next = head->next;
+            head = temp;
+
+            if(tail == nullptr)
+                tail == temp;
+
+            nodes++;
         }
 
         void push_back(T value) {
             // TODO
+            Node<T> *temp = New Node<T>;
+            temp->next = nullptr;
+            tail->next = temp;
+            tail = temp;
+
+            if (head == nullptr)
+                head = temp;
+
+            nodes++;
         }
 
         void pop_front() {
             // TODO
+            if (head == nullptr)
+                return
+            
+            Node<T> *temp = head;
+            head = head->next;            
+            delete temp;
+
+            if (nodes == 1)
+                tail = nullptr;
+            nodes--;
         }
 
         void pop_back() {
             // TODO
+            Node<T> *ptr = head;
+            
+            if (nodes == 1) {
+                delete head;
+                head = nullptr;
+                tail = nullptr;
+            }
+
+
+            while(ptr->next != temp)
+                ptr = ptr->next
+            
+            ptr->next = nullptr;
+            delete tail;
+
+            tail = ptr;
         }
 
         T operator[](int index) {
             // TODO
+            try {
+                throw (index == 0);
+            }
+            catch(bool e) {
+                cout << "Index error - La lista esta vacia" << endl;
+            }
+            
+                
+            Node<T> *ptr = head;
+            
+            while (index--) {
+                ptr = ptr->next;
+            }
+            return ptr->data;
         }
 
         bool empty() {
