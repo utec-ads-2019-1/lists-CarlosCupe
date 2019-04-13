@@ -70,7 +70,7 @@ class ForwardList : public List<T> {
 
 
             while(ptr->next != temp)
-                ptr = ptr->next
+                ptr = ptr->next;
             
             ptr->next = nullptr;
             delete tail;
