@@ -11,10 +11,12 @@ class LinkedList : public List<T> {
 
         T front() {
             // TODO
+            return this->head->data;
         }
 
         T back() {
             // TODO
+            return this->tail->data;
         }
 
         void push_front(T value) {
@@ -35,26 +37,34 @@ class LinkedList : public List<T> {
 
         T operator[](int index) {
             // TODO
+            
         }
 
         bool empty() {
             // TODO
+            return this->nodes == 0;
         }
 
         int size() {
             // TODO
+            return this->nodes;
         }
 
         void clear() {
             // TODO
+            while(this->nodes) {
+                this->pop_back()
+            }
         }
 
         void sort() {
             // TODO
+
         }
     
         void reverse() {
             // TODO
+            
         }
 
         string name() {
@@ -71,6 +81,8 @@ class LinkedList : public List<T> {
 
         void merge(LinkedList<T> list) {
             // TODO
+            for (int i = 0; i < list.size(); ++i)
+                this->push_back(list[i]);
         }
 };
 
