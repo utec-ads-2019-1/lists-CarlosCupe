@@ -2,6 +2,8 @@
 #define CIRCULAR_H
 
 #include "list.h"
+#include "iterators/bidirectional_iterator.h"
+#include <string>
 
 template <typename T>
 class CircularLinkedList : public List<T> {
@@ -46,9 +48,8 @@ class CircularLinkedList : public List<T> {
 
         void clear() {
             // TODO
-            while(this->nodes) {
-                this->pop_back()
-            }
+            while(this->nodes)
+                this->pop_back();
         }
 
         void sort() {
@@ -57,13 +58,12 @@ class CircularLinkedList : public List<T> {
     
         void reverse() {
             // TODO
-            int *temp = this->nodes;
-            Node<T> *ptr = tail;
+            int temp = this->nodes;
+            Node<T> *ptr = this->tail;
             while(temp--) {
-                swap(this->ptr->next->data, this->ptr->prev->data);
+                swap(ptr->next, ptr->prev);
                 ptr = ptr->next;
             }
-            delete temp;
         }
 
         string name() {

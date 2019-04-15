@@ -3,6 +3,7 @@
 
 #include "list.h"
 #include "iterators/bidirectional_iterator.h"
+#include <string>
 
 template <typename T>
 class LinkedList : public List<T> {
@@ -53,7 +54,7 @@ class LinkedList : public List<T> {
         void clear() {
             // TODO
             while(this->nodes) {
-                this->pop_back()
+                this->pop_back();
             }
         }
 
@@ -81,8 +82,9 @@ class LinkedList : public List<T> {
 
         void merge(LinkedList<T> list) {
             // TODO
-            for (int i = 0; i < list.size(); ++i)
+            for (int i = 0; i < list.size(); ++i) {
                 this->push_back(list[i]);
+            }
         }
 };
 
