@@ -99,7 +99,7 @@ class ForwardList : public List<T> {
 
         T operator[](int index) {
             // TODO
-            if (this->nodes == 0)
+            if (this->nodes == 0 || index >= this->nodes)
                 exit(0);
                 
             Node<T> *ptr = this->head;

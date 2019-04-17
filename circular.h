@@ -12,14 +12,30 @@ class CircularLinkedList : public List<T> {
 
         T front() {
             // TODO
+            return this->head->data;
         }
 
         T back() {
             // TODO
+            return this->tail->data;
         }
 
         void push_front(T value) {
             // TODO
+            Node<T> *temp = new Node<T>;
+            temp->data = value;
+
+            if(this->head != nullptr) {
+                this->head->prev = temp;
+                temp->next = this->head;
+            }
+            
+            this->head = temp;
+
+            if(this->tail == nullptr)
+                this->tail = temp;
+
+            this->nodes++;
         }
 
         void push_back(T value) {
@@ -36,14 +52,25 @@ class CircularLinkedList : public List<T> {
 
         T operator[](int index) {
             // TODO
+            if (this->nodes == 0)
+                exit(0);
+                
+            Node<T> *ptr = this->head;
+            
+            while (index--) {
+                ptr = ptr->next;
+            }
+            return ptr->data;
         }
 
         bool empty() {
             // TODO
+            return this->nodes == 0;
         }
 
         int size() {
             // TODO
+            return this->nodes;
         }
 
         void clear() {

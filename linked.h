@@ -91,7 +91,7 @@ class LinkedList : public List<T> {
 
         T operator[](int index) {
             // TODO
-            if (this->nodes == 0)
+            if (this->nodes == 0 || index >= this->nodes)
                 exit(0);
                 
             Node<T> *ptr = this->head;
@@ -143,7 +143,16 @@ class LinkedList : public List<T> {
     
         void reverse() {
             // TODO
+            if (this->nodes <= 1)
+                return;            
+
+            Node<T> *ptr = this->tail;
             
+            while(ptr) {
+                std::swap(ptr->prev, ptr->next);
+                ptr = ptr->next;
+            }
+            swap(this->tail, this->head);
         }
 
         string name() {
