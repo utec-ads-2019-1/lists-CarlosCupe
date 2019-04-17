@@ -123,6 +123,7 @@ void Tester::testForward(ForwardList<T>* list) {
     ++it;
     ++it;
     ASSERT(it != list->end(), "The " + list->name() + " iterator is not working");
+
 }
 
 template <typename T>

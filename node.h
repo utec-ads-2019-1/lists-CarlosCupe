@@ -9,11 +9,10 @@ struct Node {
 
     void killSelf() {
         // TODO
+        
         if (this->next != nullptr)
             this->next->killSelf();
-        
-        delete this->next;
-        delete this->prev;
+        delete this;
     }
 };
 

@@ -4,6 +4,7 @@
 #include "list.h"
 #include "node.h"
 #include "iterators/forward_iterator.h"
+#include <iostream>
 #include <string>
 
 template <typename T>
@@ -30,11 +31,10 @@ class ForwardList : public List<T> {
         void push_front(T value) {
             // TODO
             Node<T> *temp = new Node<T>;
-            
-            if(this->head == nullptr)
-                temp->next = nullptr;
-            else
-                temp->next = this->head->next;
+            temp->data = value;
+
+            if(this->head != nullptr)
+                temp->next = this->head;
             
             this->head = temp;
 
@@ -47,10 +47,9 @@ class ForwardList : public List<T> {
         void push_back(T value) {
             // TODO
             Node<T> *temp = new Node<T>;
-
-            temp->next = nullptr;
-
-            if (this->tail == nullptr)
+            temp->data = value;
+            
+            if (this->tail != nullptr)
                 this->tail->next = temp;
             
             this->tail = temp;
@@ -69,27 +68,31 @@ class ForwardList : public List<T> {
             Node<T> *ptr = this->head;
             this->head = this->head->next;            
             delete ptr;
-
-            if (this->nodes == 1)
-                this->tail = nullptr;
             this->nodes--;
+            
+            if (this->nodes == 0)
+                this->tail = nullptr;
+            
         }
 
         void pop_back() {
             // TODO
-            Node<T> *ptr = this->head;
-            
             if (this->nodes == 1) {
-                delete this->head;
+                delete this->tail;
                 this->head = nullptr;
                 this->tail = nullptr;
+                this->nodes--;
+                return;
             }
+
+            Node<T> *ptr = this->head;
 
             while(ptr->next != this->tail)
                 ptr = ptr->next;
             
             ptr->next = nullptr;
             delete this->tail;
+            this->nodes--;
 
             this->tail = ptr;
         }
@@ -122,6 +125,7 @@ class ForwardList : public List<T> {
             this->head->killSelf();
             this->head = nullptr;
             this->tail = nullptr;
+            this->nodes = 0;
         }
 
         void sort() {
@@ -170,6 +174,8 @@ class ForwardList : public List<T> {
                 ptr = temp;
                 temp = this->head->next;    
             }
+
+            swap(this->head, this->tail);
         }
 
         string name() {
