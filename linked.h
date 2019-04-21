@@ -91,7 +91,7 @@ class LinkedList : public List<T> {
 
         T operator[](int index) {
             // TODO
-            if (this->nodes == 0)
+            if (this->nodes == 0 || index >= this->nodes)
                 exit(0);
                 
             Node<T> *ptr = this->head;
@@ -142,6 +142,7 @@ class LinkedList : public List<T> {
         }
     
         void reverse() {
+<<<<<<< HEAD
             // TODO  
             Node<T> *ptr = this->tail;
             
@@ -150,6 +151,18 @@ class LinkedList : public List<T> {
                 ptr = ptr->next;
             } while(ptr);
 
+=======
+            // TODO
+            if (this->nodes <= 1)
+                return;            
+
+            Node<T> *ptr = this->tail;
+            
+            while(ptr) {
+                std::swap(ptr->prev, ptr->next);
+                ptr = ptr->next;
+            }
+>>>>>>> 2fa729961de4ff456ce9188d2bd743adc7377e1c
             swap(this->tail, this->head);
         }
 
