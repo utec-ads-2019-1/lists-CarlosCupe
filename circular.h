@@ -12,38 +12,111 @@ class CircularLinkedList : public List<T> {
 
         T front() {
             // TODO
+            return this->head->data;
         }
 
         T back() {
             // TODO
+            return this->tail->data;
         }
 
         void push_front(T value) {
             // TODO
+            Node<T> *temp = new Node<T>;
+            temp->data = value;
+
+            if(this->head != nullptr) {
+                temp->prev = this->tail;
+                temp->next = this->head;
+                this->tail->next = temp;
+                this->head->prev = temp;
+            } else {
+                temp->prev = temp;
+                temp->next = temp;
+            }
+            
+            this->head = temp;
+
+            if(this->tail == nullptr)
+                this->tail = temp;
+            this->nodes++;
         }
 
         void push_back(T value) {
             // TODO
+            Node<T> *temp = new Node<T>;
+            temp->data = value;
+            
+            if (this->tail != nullptr) {
+                temp->prev = this->tail;
+                temp->next = this->head;
+                this->head->prev = temp;
+                this->tail->next = temp;
+            }
+            
+            this->tail = temp;
+
+            if (this->head == nullptr)
+                this->head = temp;
+
+            this->nodes++;
         }
 
         void pop_front() {
             // TODO
+            if (this->nodes == 1) {
+                delete this->head;
+                this->head = this->tail = nullptr;
+                return;
+            }
+
+            this->head = this->head->next;
+            delete this->head->prev;
+            this->head->prev = this->tail;
+            this->tail->next = this->head;
+            this->nodes--;
         }
 
         void pop_back() {
             // TODO
+            if (this->nodes == 1) {
+                delete this->tail;
+                this->head = this->tail = nullptr;
+                this->nodes--;
+                return;
+            }
+
+            this->tail = this->tail->prev;
+            delete this->tail->next;
+
+            this->tail->next = this->head;
+            this->head->prev = this->tail;
+            this->nodes--;
         }
 
         T operator[](int index) {
             // TODO
+            if (this->nodes == 0)
+                exit(0);
+                
+            index = index % this->nodes;
+
+            Node<T> *ptr = this->head;
+            
+            while (index--) {
+                ptr = ptr->next;
+            }
+            return ptr->data;
         }
 
         bool empty() {
             // TODO
+            return this->nodes == 0;
         }
 
         int size() {
             // TODO
+            return this->nodes;
         }
 
         void clear() {
@@ -54,16 +127,39 @@ class CircularLinkedList : public List<T> {
 
         void sort() {
             // TODO
+            if(this->nodes <= 1)
+                return;
+
+            Node<T> *ptr = this->head->next;
+            T *arr = new T[this->nodes];
+
+            arr[0] = this->head->data;
+
+            for (int i = 1; ptr != this->head; ++i) {
+                arr[i] = ptr->data;
+                ptr = ptr->next;
+            }
+
+            std::sort(arr, arr + this->nodes);
+            ptr->data = arr[0];
+            ptr = ptr->next;
+
+            for (int i = 1; ptr != this->head; ++i) {
+                ptr->data = arr[i];
+                ptr = ptr->next;
+            }
         }
     
         void reverse() {
             // TODO
-            int temp = this->nodes;
-            Node<T> *ptr = this->tail;
-            while(temp--) {
+            Node<T> *ptr = this->head;
+            
+            do {
                 swap(ptr->next, ptr->prev);
                 ptr = ptr->next;
-            }
+            } while(ptr != this->head);
+            
+            swap(this->head, this->tail);
         }
 
         string name() {
@@ -72,10 +168,12 @@ class CircularLinkedList : public List<T> {
 
         BidirectionalIterator<T> begin() {
             // TODO
+            return BidirectionalIterator<T>(this->head);
         }
 
 	    BidirectionalIterator<T> end() {
             // TODO
+            return nullptr;
         }
 
         void merge(CircularLinkedList<T> list) {

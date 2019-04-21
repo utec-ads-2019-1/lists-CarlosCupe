@@ -4,7 +4,6 @@
 #include "list.h"
 #include "node.h"
 #include "iterators/forward_iterator.h"
-#include <iostream>
 #include <string>
 
 template <typename T>
@@ -184,10 +183,12 @@ class ForwardList : public List<T> {
 
         ForwardIterator<T> begin() {
             // TODO
+            return ForwardIterator<T>(this->head);
         }
 
 	    ForwardIterator<T> end() {
             // TODO
+            return nullptr;
         }
 
         void merge(ForwardList<T> list) {

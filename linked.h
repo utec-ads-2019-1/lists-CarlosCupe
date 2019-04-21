@@ -114,9 +114,9 @@ class LinkedList : public List<T> {
 
         void clear() {
             // TODO
-            while(this->nodes) {
-                this->pop_back();
-            }
+            this->head->killSelf();
+            this->head = this->tail = nullptr;
+            this->nodes = 0;
         }
 
         void sort() {
@@ -142,8 +142,15 @@ class LinkedList : public List<T> {
         }
     
         void reverse() {
-            // TODO
+            // TODO  
+            Node<T> *ptr = this->tail;
             
+            do {
+                swap(ptr->next, ptr->prev);
+                ptr = ptr->next;
+            } while(ptr);
+
+            swap(this->tail, this->head);
         }
 
         string name() {
@@ -152,10 +159,12 @@ class LinkedList : public List<T> {
 
         BidirectionalIterator<T> begin() {
             // TODO
+            return BidirectionalIterator<T>(this->head);
         }
 
 	    BidirectionalIterator<T> end() {
             // TODO
+            return nullptr;
         }
 
         void merge(LinkedList<T> list) {

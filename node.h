@@ -4,12 +4,15 @@
 template <typename T>
 struct Node {
     T data;
-    Node<T>* next = nullptr;
-    Node<T>* prev = nullptr;
+    Node<T>* next;
+    Node<T>* prev;
+
+    Node() {
+        next = prev = nullptr;
+    }
 
     void killSelf() {
-        // TODO
-        
+        // TODO       
         if (this->next != nullptr)
             this->next->killSelf();
         delete this;
