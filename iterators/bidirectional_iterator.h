@@ -12,7 +12,10 @@ class BidirectionalIterator : public Iterator<T> {
         BidirectionalIterator<T> operator=(BidirectionalIterator<T> other) {
             // TODO
             this->current = other.current;
-            return this;
+            // Debes retornar *this
+            //return this;
+
+            return *this;
         }
 
         bool operator!=(BidirectionalIterator<T> other) {
@@ -35,7 +38,7 @@ class BidirectionalIterator : public Iterator<T> {
         }
 
         T operator*() {
-            // TODO
+            // Si está vacía la lista?
             return this->current->data;
         }
 };

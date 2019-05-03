@@ -5,18 +5,21 @@
 #include "iterators/bidirectional_iterator.h"
 #include <string>
 
+/*
+No mezclaste con master
+*/
 template <typename T>
 class CircularLinkedList : public List<T> {
     public:
         CircularLinkedList() : List<T>() {}
 
         T front() {
-            // TODO
+            // Falta controlar el caso vacío
             return this->head->data;
         }
 
         T back() {
-            // TODO
+            // Falta controlar el caso vacío
             return this->tail->data;
         }
 
@@ -95,7 +98,7 @@ class CircularLinkedList : public List<T> {
         }
 
         T operator[](int index) {
-            // TODO
+            // Falta controlar el caso vacío
             if (this->nodes == 0)
                 exit(0);
                 
@@ -172,6 +175,7 @@ class CircularLinkedList : public List<T> {
         }
 
 	    BidirectionalIterator<T> end() {
+            // Debes retornar otra cosa
             // TODO
             return nullptr;
         }
